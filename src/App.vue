@@ -19,7 +19,13 @@ const movieStore = useMovieStore();
 		</div>
 
 		<div class="movies" v-if="movieStore.activeTab === 1">
-			<h3>All Movies</h3>
+			<div>
+				<h3>Watched (count: {{ movieStore.watchedMovies.length }})</h3>
+
+				<Movie v-for="movie of movieStore.watchedMovies" :key="movie.id" :movie="movie" />
+			</div>
+
+			<h3>All Movies (count: {{ movieStore.totalCountMovies }})</h3>
 
 			<Movie v-for="movie of movieStore.movies" :key="movie.id" :movie="movie" />
 		</div>
