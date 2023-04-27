@@ -7,6 +7,11 @@ const props = defineProps({
 		required: true,
 		default: () => {},
 	},
+	isSearch: {
+		type: Boolean,
+		required: false,
+		default: false,
+	},
 });
 
 const movieStore = useMovieStore();
@@ -21,12 +26,16 @@ const movieStore = useMovieStore();
 
 			<span class="movie-overview">{{ movie.overview }}</span>
 
-			<div class="movie-buttons" @click="movieStore.toggleWatched(movie.id)">
-				<button class="btn movie-buttons-watched">
+			<div class="movie-buttons" v-if="!isSearch">
+				<button class="btn movie-buttons-watched" @click="movieStore.toggleWatched(movie.id)">
 					<span v-if="!movie.isWatched">Watched</span>
 					<span v-else>Unwatched</span>
 				</button>
 				<button class="btn movie-buttons-delete" @click="deleteMovie(movieStore.deleteMovie(movie.id))">Delete</button>
+			</div>
+
+			<div class="movie-buttons" v-else>
+				<button class="btn btn_green">Add</button>
 			</div>
 		</div>
 	</div>
