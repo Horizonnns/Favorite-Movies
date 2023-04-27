@@ -1,5 +1,9 @@
 <script setup>
 import { useMovieStore } from '../stores/MovieStore.js';
+import { useSearchStore } from '../stores/SearchStore.js';
+
+const movieStore = useMovieStore();
+const searchStore = useSearchStore();
 
 const props = defineProps({
 	movie: {
@@ -13,8 +17,6 @@ const props = defineProps({
 		default: false,
 	},
 });
-
-const movieStore = useMovieStore();
 </script>
 
 <template>
@@ -35,13 +37,17 @@ const movieStore = useMovieStore();
 			</div>
 
 			<div class="movie-buttons" v-else>
-				<button class="btn btn_green">Add</button>
+				<button class="btn btn_green" @click="searchStore.addToUserMovies(movie)">Add</button>
 			</div>
 		</div>
 	</div>
 </template>
 
 <style lang="css" scoped>
+.flex {
+	display: flex;
+}
+
 .movie {
 	display: grid;
 	grid-template-columns: 200px 1fr;
