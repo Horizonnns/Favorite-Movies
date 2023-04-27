@@ -7,7 +7,7 @@ export const useMovieStore = defineStore('movieStore', {
 				id: 1,
 				original_title: 'Spider-Man',
 				overview:
-					'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Beatae, ducimus unde quia nisi expedita laudantium autem cumque ex magnam esse impedit fugiat, quasi corporis modi atque, inventore sint odit obcaecati!',
+					'After being bitten by a genetically altered spider at Oscorp, nerdy but endearing high school student Peter Parker is endowed with amazing powers to become the superhero known as Spider-Man.',
 				poster_path: '/gh4cZbhZxyTbgxQPxD0dOudNPTn.jpg',
 				release_date: '2002-05-01',
 				isWatched: false,
@@ -29,6 +29,18 @@ export const useMovieStore = defineStore('movieStore', {
 		},
 		totalCountMovies() {
 			return this.movies.length;
+		},
+	},
+	actions: {
+		setActiveTab(id) {
+			this.activeTab = id;
+		},
+		toggleWatched(id) {
+			const idx = this.movies.findIndex((el) => el.id === id);
+			this.movies[idx].isWatched = !this.movies[idx].isWatched;
+		},
+		deleteMovie(id) {
+			this.movies = this.movies.filter((el) => el.id !== id);
 		},
 	},
 });

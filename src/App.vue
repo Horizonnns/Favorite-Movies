@@ -1,8 +1,13 @@
 <script setup>
-import { useMovieStore } from './stores/MovieStore.js';
 import Movie from './components/Movie.vue';
+import { useMovieStore } from './stores/MovieStore';
 
 const movieStore = useMovieStore();
+
+// switching with tabs
+const setTab = (id) => {
+	movieStore.setActiveTab(id);
+};
 </script>
 
 <template>
@@ -14,8 +19,8 @@ const movieStore = useMovieStore();
 		</header>
 
 		<div class="tabs">
-			<button :class="['btn', { btn_green: movieStore.activeTab === 1 }]">Favorite</button>
-			<button :class="['btn', { btn_green: movieStore.activeTab === 2 }]">Search</button>
+			<button :class="['btn', { btn_green: movieStore.activeTab === 1 }]" @click="setTab(1)">Favorite</button>
+			<button :class="['btn', { btn_green: movieStore.activeTab === 2 }]" @click="setTab(2)">Search</button>
 		</div>
 
 		<div class="movies" v-if="movieStore.activeTab === 1">

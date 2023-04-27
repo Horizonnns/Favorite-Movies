@@ -1,4 +1,6 @@
 <script setup>
+import { useMovieStore } from '../stores/MovieStore.js';
+
 const props = defineProps({
 	movie: {
 		type: Object,
@@ -6,6 +8,8 @@ const props = defineProps({
 		default: () => {},
 	},
 });
+
+const movieStore = useMovieStore();
 </script>
 
 <template>
@@ -17,12 +21,12 @@ const props = defineProps({
 
 			<span class="movie-overview">{{ movie.overview }}</span>
 
-			<div class="movie-buttons">
+			<div class="movie-buttons" @click="movieStore.toggleWatched(movie.id)">
 				<button class="btn movie-buttons-watched">
 					<span v-if="!movie.isWatched">Watched</span>
 					<span v-else>Unwatched</span>
 				</button>
-				<button class="btn movie-buttons-delete">Delete</button>
+				<button class="btn movie-buttons-delete" @click="deleteMovie(movieStore.deleteMovie(movie.id))">Delete</button>
 			</div>
 		</div>
 	</div>
