@@ -24,16 +24,18 @@ const setTab = (id) => {
 			<button :class="['btn', { btn_green: movieStore.activeTab === 2 }]" @click="setTab(2)">Search</button>
 		</div>
 
-		<div class="movies" v-if="movieStore.activeTab === 1">
-			<div>
-				<h3>Watched (count: {{ movieStore.watchedMovies.length }})</h3>
+		<div class="movies flex" v-if="movieStore.activeTab === 1">
+			<div class="margin">
+				<h3>Watched {{ movieStore.watchedMovies.length }}</h3>
 
 				<Movie v-for="movie of movieStore.watchedMovies" :key="movie.id" :movie="movie" />
 			</div>
 
-			<h3>All Movies (count: {{ movieStore.totalCountMovies }})</h3>
+			<div class="margin">
+				<h3>All Movies {{ movieStore.totalCountMovies }}</h3>
 
-			<Movie v-for="movie of movieStore.movies" :key="movie.id" :movie="movie" />
+				<Movie v-for="movie of movieStore.movies" :key="movie.id" :movie="movie" />
+			</div>
 		</div>
 
 		<div class="search" v-else>
@@ -43,6 +45,15 @@ const setTab = (id) => {
 </template>
 
 <style lang="css">
+.flex {
+	display: flex;
+}
+
+.margin {
+	margin-left: 30px;
+	margin-right: 30px;
+}
+
 .header {
 	display: flex;
 	justify-content: center;
